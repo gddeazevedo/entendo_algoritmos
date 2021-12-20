@@ -19,6 +19,7 @@ Capítulos
   - Com a pesquisa binária, você chuta um número intermadiário e elimina a metade dos números restantes a cada vez.
   - Para uma lista de n elementos, a pesquisa bínaria precisa de log2(n) (log de n na base 2) etapas para retornar o valor correto, enquanto que a pesquisa simples (ou linear) precisa de n etapas.
   - A pesquisa binária só funciona quando a *lista está ordenada*
+  - A pesquisa binária é executada com tempo logarítmico
 
     ```python
     # Binary Search
