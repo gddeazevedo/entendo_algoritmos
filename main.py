@@ -1,4 +1,4 @@
-from algorithms.binary_search import binary_search
+from algorithms import binary_search
 
 
 if __name__ == '__main__':
