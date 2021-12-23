@@ -40,3 +40,14 @@ Capítulos
 
         return None
     ```
+
+- Notação Big O
+  - É uma notação especial que diz o quão rápido é um algoritmo
+  - Tempo de execução dos algoritmos cresce a taxas diferentes
+  - Não basta saber quanto tempo um algoritmo leva para ser executado, pois isso depende de fatores externos como processador, linguagem, memória etc.
+  - É mais importante saber se o tempo de execução aumenta conforme o tamanho da entrada aumenta
+  - A notação Big O informa quão rápido é um algoritmo, quão rapidamente ele cresce
+  - A notação não fornece o tempo em segundos
+  - Ela permite que você compare o número de operações
+  - Por exemplo, a busca binária precisa de log n operações pra verificar uma lista de tamanho n. Logo, a notação Big O para o binary sort é O(log n)
+  - De maneira geral, a notação big O pode ser escrita como O(f(n)), onde f(n) é uma função que fornece o número de operações que um algoritmo realiza
