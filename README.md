@@ -63,7 +63,7 @@ Capítulos
     - O(n), tempo linear. Exemplo: pesquisa simples (ou linear)
     - O(n * log n). Exemplo: quicksort
     - O(n²). Exemplo: selection sort
-    - O(n!). Exemplo caixeiro-viajante
+    - O(n!). Exemplo: caixeiro-viajante
   - **Principais pontos**:
     - ***A rapidez de um algoritmo não é medida em segundos, mas pelo crescimento do número de operações***
     - Discutimos sobre o quão rapidamente o tempo de execução de um algoritmo aumenta conforme o número de elementos (tamanho do input) aumenta
@@ -71,5 +71,21 @@ Capítulos
     - O(log n) é mais rápido do que O(n), e O(log n) fica ainda mais rápido conforme a lista aumenta
 
 ## 2 - Ordenação por seleção
+
+- Como funciona a memória
+  - O computador se parece com um grande conjunto de gavetas, e cada gaveta tem seu endereço. O conjunto de gavetas é chamado de memória. Podemos armazenar coisas nas gavetas. Cada 'gaveta' é um slot/espaço na memória
+  - Cada vez que queremos armazenar um item na memória, pedimos ao computador um pouco de espaço e ele nos dá um endereço no qual podemos armazenar o item que queremos
+  - Se quisermos armazenar múltiplos itens, existem duas maneiras para fazer isso: arrays e listas encadeadas
+
+- Arrays e listas encadeadas
+  - Arrays armazenam itens contiguamente (um do lado do outro) na memória
+  - Se você quiser adicionar um novo item ao array, você precisa solicitar ao computador uma área de momória que cabe todos os itens contiguamente
+  - Adicionar novos itens a um array é lento
+  - Um jeito de contornar o problema de adição de itens a um array é 'reservar lugares', mesmo que não utilize todos. Porém, isso traz desvantagens:
+    - Você pode não precisar dos espaços extras reservados, então a memória será desperdiçada. Vocẽ nao está utilizando memória, mas ninguém pode usá-la também
+    - Você pode precisar adicionar mais itens (além do número de espaços reservados), então você terá de mover todos os itens para um novo espaço de memória que caiba todos
+  - Listas encadeadas resolvem o problema da adição de itens
+
+- Listas encadeadas
 
 ## 4 - Quicksort
