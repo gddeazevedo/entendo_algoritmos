@@ -1,7 +1,6 @@
-from algorithms import binary_search
+import algorithms
 
 
 if __name__ == '__main__':
-    array = [1, 3, 5, 7, 9]
-    print(binary_search(array, 3)) # => 1
-    print(binary_search(array, 0)) # => None
+    array = [4, 5, 6, 78, 1, 3, 4, 0]
+    print(algorithms.selection_sort(array))

@@ -75,11 +75,11 @@ Capítulos
 - Como funciona a memória
   - O computador se parece com um grande conjunto de gavetas, e cada gaveta tem seu endereço. O conjunto de gavetas é chamado de memória. Podemos armazenar coisas nas gavetas. Cada 'gaveta' é um slot/espaço na memória
   - Cada vez que queremos armazenar um item na memória, pedimos ao computador um pouco de espaço e ele nos dá um endereço no qual podemos armazenar o item que queremos
-  - Se quisermos armazenar múltiplos itens, existem duas maneiras para fazer isso: arrays e listas encadeadas
+  - ***Se quisermos armazenar múltiplos itens, existem duas maneiras para fazer isso: arrays e listas encadeadas***
 
 - Arrays e listas encadeadas
   - Arrays armazenam itens contiguamente (um do lado do outro) na memória
-  - Se você quiser adicionar um novo item ao array, você precisa solicitar ao computador uma área de momória que cabe todos os itens contiguamente
+  - Se você quiser adicionar um novo item ao array, você precisa solicitar ao computador uma área de momória que caiba todos os itens contiguamente
   - Adicionar novos itens a um array é lento
   - Um jeito de contornar o problema de adição de itens a um array é 'reservar lugares', mesmo que não utilize todos. Porém, isso traz desvantagens:
     - Você pode não precisar dos espaços extras reservados, então a memória será desperdiçada. Vocẽ nao está utilizando memória, mas ninguém pode usá-la também
@@ -87,5 +87,84 @@ Capítulos
   - Listas encadeadas resolvem o problema da adição de itens
 
 - Listas encadeadas
+  - Com listas encadeadas, seus itens podem estar em qualquer lugar da memória. Cada item armazena o endereço do próximo item da lista, endereços de aleatórios de memória ficam ligados
+  - Adicionar um item a uma lista encadeada é fácil: você o coloca em qualquer lugar da memória e armazena o endereço no item anterior
+  - Com listas encadeadas, nunca precisamos mover seus itens
+  - Listas encadeadas são muito melhores do que arrays para inserções de novos itens
+  - Só podem lidar com acesso sequencial
+  - É uma prática comum acompanhar o primeiro e o último item de uma lista encadeada para que o tempo de execução para deletá-los seja O(1)
+
+- Arrays
+  - Listas encadeadas são ótimas se você quiser ler todos os itens, um de cada vez, mas se você quiser pular de um item para outro, as listas encadeadas são terríveis. Se quiser ler apenas o último item da lista, você precisa percorrer todos os outros itens antes, perguntando a cada um deles o endereço de memória do próximo item até chegar no último, pois não tem como saver seu endereço de memória sem perguntar para o item anterior
+  - Com arrays isso é diferente, você sabe o endereço de memória de cada item
+  - Arrays são ótimos se você deseja ler elementos aleatórios, pois pode encontrar qualquer elemento instantaneamente
+  - Com listas encadeadas, os elementos não estão próximos uns dos outros, não há como calcular instantaneamente a posição de um endereço na memória
+  - Podem lidar com acesso aleatório
+  - **Terminologia:**
+    - Os elementos de um array são numerados. Essa numeração começa no item 0
+    - A posição de um elemento é chamado de índice
+  
+- Tempo de execução para operações comuns de arrays e listas:
+  - Obs.: inserções e eliminações terão tempo de execução constante se, e somente se, o elemento a ser deletado ou inserido puder ser acessado instantaneamente
+  - O(n) = tempo de execução linear
+  - O(1) = tempo de execução constante
+  - Leitura:
+    - arrays: O(1)
+    - listas: O(n)
+  - Inserção:
+    - arrays: O(n)
+    - listas: O(1)
+  - Eliminação:
+    - arrays: O(n)
+    - listas: O(1)
+
+- Tipos de acesso:
+  - Sequencial: ler os elementos, passando um por um
+  - Aleatório: ler os elementos diretamente
+
+- Ordenação por seleção
+  - É um algoritmo bom, mas não muito rápido
+  - Serve para ordenar elementos numa lista
+  - Você precisa buscar o menor item e colocar na primeira posição, achar o segundo menor item e botar na segunda posição e assim por diante
+  - Para achar o menor item numa lista é preciso percorrer n elementos, ou seja isso tem um tempo de execução O(n)
+  - Achar o menor item precisa ser repetido n vezes a operação O(n)
+  - Ache o menor elemento dentre os n elementos, depois o segundo menor dentre os n - 1 elementos, isso se repete até checar apenas um elemento. A soma dessas operações dá n² + n) / 2
+  - Ou seja, o tempo de execução da ordenação por selecção é O(n²)
+  - [Algoritmo da ordenação por seleção](algorithms/selection_sort.py):
+
+    ```python
+    def get_smallest_element_index(array):
+        smallest_element_index = 0 # Current smallest element index
+        smallest_element = array[0] # Current smallest element
+
+        for index in range(1, len(array)):
+            if array[index] < smallest_element:
+                smallest_element = array[index]
+                smallest_element_index = index
+
+        return smallest_element_index
+
+
+    def selection_sort(array):
+        new_array = []
+
+        for _ in range(len(array)):
+            smallest_index = get_smallest_element_index(array) # Find the smallest element index
+            new_array.append(array.pop(smallest_index))
+
+        return new_array
+    ```
+
+- ***Principais pontos***
+  - A memória do computador é como um conjunto gigante de gavetas
+  - Quando se quer armazenar múltiplos elementos, usa-se array ou list encadeada
+  - No array, todos os elementos são armazenados um do lado do outro
+  - Na lista, os elementos estão espalhados e um elemento armazena o endereço do próximo elemento
+  - Arrays permitem leituras rápidas
+  - Listas encadeadas permitem rápidas inserções e eliminações
+  - Todos os elementos de um array deve, ser do mesmo tipo
+  - ***Arrays e listas encadeadas são os blocos fundamentais para estruturas de dados mais complexas***
+
+## 3 - Recursão
 
 ## 4 - Quicksort
