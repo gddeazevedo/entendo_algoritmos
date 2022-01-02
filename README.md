@@ -7,6 +7,7 @@ Capítulos
 
  - [1 - Introdução a algoritmos](#1---introdução-a-algoritmos)
  - [2 - Ordenação por seleção](#2---ordenação-por-seleção)
+ - [2 - Recursão](#3---recursão)
  - [4 - Quicksort](#4---quicksort)
 
 </h2>
@@ -166,5 +167,44 @@ Capítulos
   - ***Arrays e listas encadeadas são os blocos fundamentais para estruturas de dados mais complexas***
 
 ## 3 - Recursão
+
+- Recursão é quando uma função chama a si mesma
+- *Ela é usada para tornar a resposta mais clara*
+- Não há benefício quanto ao desempenho ao utilizar recursão
+- Loops algumas vezes são melhores para o desempenho de um programa
+
+- Caso-base e caso recursivo
+  - Devido ao fato de a função recursiva chamar a si mesma, é mais fácil escrevê-la erroneamente e acabar em um loop infinito
+  - Quando você escreve uma função recursiva, deve informar quando a recurção deve parar
+  - *Por isso, toda função recursiva tem duas partes:*
+    - ***Caso-base:*** é quando a função nao chama a si mesma novamente, de forma que o programa não se torne um loop infinito
+    - ***Caso recursivo:*** é quando a função chama a si mesma
+
+- A pilha
+  - Pilha de chamada ou *call stack*, é um conceito importante em programção e indispensável para entender a recursão
+  - É uma estrutura de dados simples. Quando se insere um item, ele é colocado no topo da pilha. Quando se lê um item, lê apenas o topo da pilha e ele é retirado da pilha.
+  - Inserir um novo item ao topo (push)
+  - Remover o item do topo e lê-lo (pop)
+
+- A pilha de chamada
+  - Seu computador usa uma pilha interna denominada *pilha de chamada*
+  - Seu computador, a cada chamada de função, aloca um caixa na memória para a chamada e então salva na memória os valores para todas as variáveis
+  - Quando você chama uma função a partir de outra, a chamada de função fica pausada em um estado parcialmente completo. Todos os valores das variáveis para aquela função ainda estão armazenados na memória
+  - É utilizado uma pilha para guardar as chamadas de funções a partir de funções
+  - A pilha de chamada é usada para guardar as variáveis de múltiplas funções
+
+- A pilha de chamada com recursão
+  - As funções recursivas também utilizam a pilha de chamada
+  - Usar pilha é bom, porém, existe um custo: salvar toda essa informação pode ocupar muita memória
+  - Para a situação de muito espaço de memória ocupado, há duas opções:
+    - Reescrever o código utilizando loops
+    - Utilizar tail recursion
+
+- ***Principais pontos***
+  - Recursão é quando uma função chama a si mesma
+  - Toda função recursiva tem dois casos: o caso-base e o caso recursivo
+  - Uma pilha tem duas operações: push e pop
+  - Todas as chamadas de função vão para a pilha de chamada
+  - A pilha de chamada pode ficar muito grande e ocupar muita memória
 
 ## 4 - Quicksort

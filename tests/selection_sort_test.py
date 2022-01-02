@@ -3,7 +3,7 @@ import random
 import algorithms
 
 
-class BinarySearchTestCase(unittest.TestCase):
+class SelectionSortTestCase(unittest.TestCase):
     '''Tests for the selection_sort function'''
 
     def test_if_array_is_sorted(self):
