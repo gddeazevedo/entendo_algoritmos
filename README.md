@@ -54,7 +54,7 @@ Capítulos
   - A notação não fornece o tempo em segundos
   - Ela permite que você compare o número de operações
   - Por exemplo, a busca binária precisa de log n operações pra verificar uma lista de tamanho n. Logo, a notação Big O para o binary sort é O(log n)
-  - De maneira geral, a notação big O pode ser escrita como O(f(n)), onde f(n) é uma função que fornece o número de operações que um algoritmo realiza
+  - De maneira geral, a notação big O pode ser escrita como O(f(n)), onde f(n) é uma função que fornece o número de operações que um algoritmo realiza em função do tamanho da entrada
   - ***A notação Big O conta o número de operações***
   - A notação big O nos dá a taxa de crescimento do tempo de execução em função do tamanho da entrada
   - A notação Big O leva em conta a pior das hipóteses para contar o número de operações
@@ -129,7 +129,7 @@ Capítulos
   - Você precisa buscar o menor item e colocar na primeira posição, achar o segundo menor item e botar na segunda posição e assim por diante
   - Para achar o menor item numa lista é preciso percorrer n elementos, ou seja isso tem um tempo de execução O(n)
   - Achar o menor item precisa ser repetido n vezes a operação O(n)
-  - Ache o menor elemento dentre os n elementos, depois o segundo menor dentre os n - 1 elementos, isso se repete até checar apenas um elemento. A soma dessas operações dá n² + n) / 2
+  - Ache o menor elemento dentre os n elementos, depois o segundo menor dentre os n - 1 elementos, isso se repete até checar apenas um elemento. A soma dessas operações dá (n² + n) / 2
   - Ou seja, o tempo de execução da ordenação por selecção é O(n²)
   - [Algoritmo da ordenação por seleção](algorithms/selection_sort.py):
 
@@ -208,3 +208,12 @@ Capítulos
   - A pilha de chamada pode ficar muito grande e ocupar muita memória
 
 ## 4 - Quicksort
+
+- Dividir para conquistar (DC)
+  - É uma técnica recursiva muito conhecida para resolução de probleas
+  - ***Os algoritmos DC são recursivos***
+  - Para resolver um problema utilizando DC, deve-se seguir dois passos:
+    1. ***Descobrir o caso-base, que deve ser o caso mais simples possível***
+    2. ***Dividir ou diminuir o problema até que ele se torne o caso-base***
+  - **A cada recursão deve-se reduzir o problema**
+  - O algoritmo DC não é um simples algoritmo que se aplica em um problema, mas sim **uma maneira de pensar sobre o problema**
