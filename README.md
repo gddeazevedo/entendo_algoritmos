@@ -1,4 +1,6 @@
-<h1>Anotações sobre o livro <strong>"Entendo Algoritmos"</strong></h1>
+<h1>Anotações sobre o livro <strong>"Entendo Algoritmos"</strong> de Aditya Y. Bhargava</h1>
+
+<https://github.com/egonSchiele/grokking_algorithms>
 
 
 <h2>
@@ -7,7 +9,7 @@ Capítulos
 
  - [1 - Introdução a algoritmos](#1---introdução-a-algoritmos)
  - [2 - Ordenação por seleção](#2---ordenação-por-seleção)
- - [2 - Recursão](#3---recursão)
+ - [3 - Recursão](#3---recursão)
  - [4 - Quicksort](#4---quicksort)
 
 </h2>
@@ -23,6 +25,13 @@ Capítulos
   - Para uma lista de n elementos, a pesquisa bínaria precisa de log2(n) (log de n na base 2) etapas para retornar o valor correto, enquanto que a pesquisa simples (ou linear) precisa de n etapas.
   - A pesquisa binária só funciona quando a *lista está ordenada*
   - A pesquisa binária é executada com tempo logarítmico
+  - Lógica da busca binária:
+    1. Ache o elemento central
+    2. O elemento cetral é o elemento procurado? Se sim, retorna o index dele
+    3. Se o elemento central é menor do que o procurado, então elimine todos os itens menores do que o elemento central
+    4. Se o elemento central é maior do que o procurado, então elimine todos os itens maiores do que o elemento central
+    5. Repetir os passos anteriores até encontrar
+    6. Se o elemento não é encontrado, então retorne None
   - [Algoritmo da busca binária](algorithms/binary_search.py):
 
     ```python
@@ -131,6 +140,11 @@ Capítulos
   - Achar o menor item precisa ser repetido n vezes a operação O(n)
   - Ache o menor elemento dentre os n elementos, depois o segundo menor dentre os n - 1 elementos, isso se repete até checar apenas um elemento. A soma dessas operações dá (n² + n) / 2
   - Ou seja, o tempo de execução da ordenação por selecção é O(n²)
+  - A lógica da ordenação por seleção:
+    1. Ache o menor item, coloque-o na primeira posição
+    2. Ache o segundo menor item, coloque-o na segunda posição
+    3. Ache o terceiro menor item, coloque-o na terceira posição
+    4. Ache o quarto e assim por diante até que o array esteja ordenado
   - [Algoritmo da ordenação por seleção](algorithms/selection_sort.py):
 
     ```python
@@ -217,3 +231,36 @@ Capítulos
     2. ***Dividir ou diminuir o problema até que ele se torne o caso-base***
   - **A cada recursão deve-se reduzir o problema**
   - O algoritmo DC não é um simples algoritmo que se aplica em um problema, mas sim **uma maneira de pensar sobre o problema**
+
+- Quicksort
+  - É um algoritmo de ordenação
+  - É muito mais rápido do que o selection sort
+  - O algoritmo quicksort também utiliza a estratégia dividir para conquistar
+  - Qual é o array mais simples que um algoritmo de ordenação pode ordenar? Arrays vazios ou arrays com apenas um elemento serão o **caso-base**
+  - A lógica do quick sort:
+    1. Escolha um elemento do array, que será chamado de pivô
+    2. Particione o array em dois subarrays, seperando-os entre elementos menores que o pivô e elementos maiores que o pivô
+    3. Execute o quicksort recursivamente em ambos os subarrays
+  - [Algoritmo do quicksort](algorithms/quick_sort.py)
+
+    ```python
+    def quicksort(array):
+        if len(array) < 2:
+            return array
+
+        pivot = array[0]
+        smallers = [i for i in array[1:] if i <= pivot]
+        biggers = [i for i in array[1:] if i > pivot]
+
+        return quicksort(smallers) + [pivot] + quicksort(biggers)
+    ```
+  
+- Notação Big O para o quicksort
+  - A velocidade do quicksort depende do pivô escolhido
+  - Na pior situação, o quicksort tem tempo de execução O(n²)
+  - No caso médio, o quicksort tem tempo de execução O(n log n)
+
+- ***Principais pontos***
+  - A estratégia DC funciona por meio da divisão do problema em problemas menores. Se você estiver utilizando DC em uma lista, o caso-base provavelmente será um array vazio ou um array com apenas um elemento
+  - Se você estiver implementando o quicksort, escolha um elemento aleatório como pivô. O tempo de execução do quicksort é O(n log n)
+  - A costante, na notação Big O, pode ser relevante em alguns casos. Está é a razão pela qual o quicksort é mais rápido do que o merge sort

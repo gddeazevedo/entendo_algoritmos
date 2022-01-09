@@ -1,6 +1,8 @@
 import algorithms
+import random
 
 
 if __name__ == '__main__':
-    qtt = algorithms.recursion.count_elements([1, 2, 3, 4, 5,6, 7, 8, 9])
-    print(qtt)
+    array = [random.randint(1, 100) for _ in range(10)]
+    print(array)
+    print(algorithms.quick_sort(array))
