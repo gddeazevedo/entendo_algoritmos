@@ -11,6 +11,7 @@ Capítulos
  - [2 - Ordenação por seleção](#2---ordenação-por-seleção)
  - [3 - Recursão](#3---recursão)
  - [4 - Quicksort](#4---quicksort)
+ - [5 - Tabelas hash](#5---tabelas-hash)
 
 </h2>
 
@@ -224,7 +225,7 @@ Capítulos
 ## 4 - Quicksort
 
 - Dividir para conquistar (DC)
-  - É uma técnica recursiva muito conhecida para resolução de probleas
+  - É uma técnica recursiva muito conhecida para resolução de problemas
   - ***Os algoritmos DC são recursivos***
   - Para resolver um problema utilizando DC, deve-se seguir dois passos:
     1. ***Descobrir o caso-base, que deve ser o caso mais simples possível***
@@ -238,9 +239,10 @@ Capítulos
   - O algoritmo quicksort também utiliza a estratégia dividir para conquistar
   - Qual é o array mais simples que um algoritmo de ordenação pode ordenar? Arrays vazios ou arrays com apenas um elemento serão o **caso-base**
   - A lógica do quick sort:
-    1. Escolha um elemento do array, que será chamado de pivô
-    2. Particione o array em dois subarrays, seperando-os entre elementos menores que o pivô e elementos maiores que o pivô
-    3. Execute o quicksort recursivamente em ambos os subarrays
+    1. Retorna o array se ele tiver 1 ou 0 elementos, pois ele estará ordenado
+    2. Escolha um elemento do array, que será chamado de pivô
+    3. Particione o array em dois subarrays, seperando-os entre elementos menores que o pivô e elementos maiores que o pivô
+    4. Execute o quicksort recursivamente em ambos os subarrays
   - [Algoritmo do quicksort](algorithms/quick_sort.py)
 
     ```python
@@ -254,8 +256,21 @@ Capítulos
 
         return quicksort(smallers) + [pivot] + quicksort(biggers)
     ```
-  
+
+- Merge sort versus quick sort
+  - Constante é a quantidade determinada de tempo que seu algoritmo leva para ser executado
+  - Ela pode ser por exemplo 10ms, 1s, 1h
+  - Normalmente se ignora a constante, pois, caso dois algoritmos tenham tempos de execução diferentes, a constante não importará.
+  - Porém, as vezes, a constante faz diferença. O quicksort, comparado ao merge sort, é um exemplo disso.
+  - O quick sort tem uma constante menor do que o merge sort. Assim, como ambos têm o mesmo tempo de execução O(n log n), o quick sort acaba sendo mais rápido na prática
+
 - Notação Big O para o quicksort
+  - O peso da pilha de chamada (no melhor caso) é O(log n)
+  - O peso da pilha de chamada (no pior caso) é O(n)
+  - Cada nível da pilha possui um tempo de execução O(n)
+  - Logo, no melhor caso, o quicksort tem tempo de execução O(n log n) e, no pior caso, possui tempo de execução O(n²)
+  - O(n) * O(log n) = O(n log n)
+  - O(n) * O(n) = O(n²)
   - A velocidade do quicksort depende do pivô escolhido
   - Na pior situação, o quicksort tem tempo de execução O(n²)
   - No caso médio, o quicksort tem tempo de execução O(n log n)
@@ -264,3 +279,139 @@ Capítulos
   - A estratégia DC funciona por meio da divisão do problema em problemas menores. Se você estiver utilizando DC em uma lista, o caso-base provavelmente será um array vazio ou um array com apenas um elemento
   - Se você estiver implementando o quicksort, escolha um elemento aleatório como pivô. O tempo de execução do quicksort é O(n log n)
   - A costante, na notação Big O, pode ser relevante em alguns casos. Está é a razão pela qual o quicksort é mais rápido do que o merge sort
+
+## 5 - Tabelas hash
+
+- ***Queremos encontrar itens com o tempo de execução O(1)***. O que é mais rápido do que a busca binária
+
+- Funções hash
+  - É uma função na qual você insere uma string e, depois disso, a função retorna um número
+  - Em terminologia mais técnica, uma função hash mapeia strings e números
+  - *Uma função hash mapeia strings e as relaciona a números*
+  - Não existe um padrão indicando qual número será retornado após a inserção de uma string, **mas existem alguns requisitos para uma função hash**
+  - ***Requisitos para uma função hash:***
+    - **Ela deve ser consistente: um input deve ter sempre o mesmo output**
+    - **Ela deve mapear diferentes palavras para diferentes números: inputs diferentes geram outputs diferentes**
+  - Uma função hash pode ser usada para criar uma estrutura de dados: as *tabelas hash*
+  - Coloque uma função hash em conjunto com um array e você terá uma tabela hash
+  - Insira um valor na função hash, ela retornará o indice do array
+  - A função hash mapeia consistentemente um nome para o mesmo índice
+  - A função hash informará a posição exata no array
+  - As tabelas hash são inteligentes, elas usam uma função hash para indicar onde armazenar os elementos
+  - Tabelas hash também são conhecidas como mapas hash, mapas, dicionários e tabelas de dispersão
+  - Uma tabela hash contém chaves e valores
+  - Uma tabela hash mapeia chaves e valores
+
+- Utilização
+  - Tabelas hash são amplamente utilizadas
+  - Usando tabelas hash para pesquisas:
+    - Um celular possui uma agenda telefônica integrada
+    - Cada nome está associado a um número telefônico
+    - A lista telefônica deve ter as funcionalidades:
+      - Adicionar o nome de uma pessoa e o número de telefone associado a este nome
+      - Inserir o nome de uma pessoa e receber o número telefônico associado a ela
+  - As tabelas hash são ótimas opções quando:
+    - Se deseja mapear algum item com relação a outro
+    - Se precisa pesquisar algo
+  - ***As tabelas hash são usadas para pesquisas em uma escala muito maior***
+    - Exemplo: quando se acessa um website, o seu computador deve traduzir o nome do domínio para a forma de um endereço de IP. Para cada website que entrar, o endereço deverá ser traduzido para um endereço de IP. Ou seja, mapear um endereço de website para um endereço de IP. Este processo é chamado de resolução de DNS, e as tabelas hash são uma das maneiras pelas quais esta funcionalidade pode ser implementada
+
+  - Evitando duplicatas
+    - Uma tabela hash pode ser usada para verificar se uma pessoa já votou em um sistema de votação
+    - A tabela hash informa instantâneamente se uma pessoa já votou ou não
+    - [Exemplo de verificador de votação](algorithms/hash_tables/check_voter.py)
+
+      ```python
+      def verify_voter(voted: dict[str, bool], name: str):
+          if voted.get(name):
+              print('Já votou!')
+          else:
+              voted[name] = True
+              print('Pode votar!')
+      ```
+
+  - Utilizando tabelas hash como cache
+    - O caching funciona da seguinte forma: os websites lembram de certos dados em vez de recalculá-los a cada solicitação. Isso torna a aplicação mais rápida e consome menos recursos
+    - Os dados destes cachings são armazenados em uma tabela hash
+    - Desta forma, o servidor apenas trabalha se a os dados referentes àquela URL não estiverem armazenados no cache
+    - [Exemplo reprensentativo de caching](algorithms/hash_tables/caching_demo.py)
+
+      ```python
+      cache = {}
+
+      def get_data(url):
+          return []
+
+      def get_page(url):
+          if cache.get(url):
+              return cache[url] # Return data in cache
+
+          data = get_data(url)
+          cache[url] = data # Saves the data in cache
+          return data
+      ```
+
+  - Recapitulando
+    - As tabelas hash são úteis para:
+      - Modelar relações entre dois itens
+      - Filtrar por duplicatas
+      - Caching/memorização de dados, em vez de solicitar estes dados do servidor
+
+- Colisões (ler no livro esta parte)
+  - Foi dito anteriormente que uma função hash sempre mapeia diferentes chaves para diferentes espaços em um array. Na realidade, é praticamente impossível escrever uma função hash que faça isso
+  - *Uma colisão é quando duas chaves são indicadas/mapeadas para o mesmo espaço, e isso é um problema.*
+  - Uma forma simples de resolver este problema é: se diversas chaves mapeiam para o mesmo espaço, então inicie uma lista encadeada neste espaço
+  - Se a lista encadeada for pequan não haverá nenhum problema para pesquisar os itens
+  - Porém, se ela for grande, a tabela hash se torna ineficiente, pois a lista encadeada aumentará seu tempo de execução
+  - Duas lições importantes:
+    1. A função hash é muito importante. Ela mapeia (no caso do exemplo do livro) todas as chaves para um único espaço. Idealmente, a função hash mapearia chaves de maneira simétrica por toda a hash
+    2. Caso as listas encadeadas se tornem muito longas, elas aumentarão demais o tempo de execução da tabela hash.
+  - As funções hash são importantes, pois uma boa função hash cria poucas colisões
+
+- Desempenho
+  - No caso médio, as tabelas hash têm tempo de execução O(1) para tudo
+  - O(1) é chamado tempo constante.
+  - *Tempo constante não é algo que acontece instantâneamente, mas sim um tempo que continuará sempre o mesmo, independentemente do tamanho do input*
+  - No pior caso, uma tabela hash tem tempo de execução O(n), o que é bem lento
+  - ***Caso médio***
+    - Procura: O(1)
+    - Inserção: O(1)
+    - Remoção: O(1)
+  - ***Pior caso***
+    - Procura: O(n)
+    - Inserção: O(n)
+    - Remoção: O(n)
+  - As tabelas hash, no caso médio, são tão rápidas quanto arrays na busca e tão rápidas quanto listas encadeadas na inserção e na remoção
+  - As tabelas hash, no pior caso, são lentas
+  - *Para não cair no pior caso, é necessário evitar colisões*
+  - ***Para evitar colisões são necessários***
+    - um baixo fator de carga
+    - uma boa função hash
+
+- Fator de carga
+  - *O fator de carga mede quantos espaços vazios continuam vazios numa tabela hash*
+  - **Para calcular o fator de carga basta fazer a razão entre o número de itens na tabela e o número total de espaços**
+  - fator de carga = (n° de itens na tabela) / (n° total de espaços)
+  - As tabelas hash utilizam um array para armazenamento, então você deve contar o número de espaços usados no array
+  - Um fator de carga maior do que 1 indica que há mais itens do que espaços no array
+  - Se o fator de carga começar a crescer, será necessário adicionar mais espaços na tabela hash. Isso se chama *redimensionamento*
+  - Fator de carga < 1 => Há mais espaços do que intens
+  - Fator de carga = 1 => Todos os espaços estão ocupados
+  - Fator de carga > 1 => Há mais itens do que espaços
+  - *Para redimensionar uma tabela hash, deve-se criar um novo array com mais espaços e depois reinserir todos os itens nesta nova tabela hash utilizando a função hash*
+  - ***Com um fator de carga menor haverá menos colisões***
+  - Uma boa regra geral é: redimensione quando o fator de carga for maior do que 0,7
+  - O redimensionamento é caro e não deve ser feito com frequência. No entanto, em média, as tabelas hash têm tempo de execução O(1), mesmo com o redimensionamento
+
+- Uma boa função hash
+  - Uma boa função hash distribui os valores no array simetricamente
+  - Uma função hash não ideal agrupa valores e produz diversas colisões
+
+- ***Principais pontos***
+  - Você pode fazer uma tabela hash ao combinar uma função hash com um array
+  - Colisões são problemas. É necessário haver uma função hash que minimize colisões
+  - As tabelas hash são extremamente rápidas para pesquisar, inserir e remover itens
+  - Tabelas hash são boas para modelar relações entre dois itens
+  - Se o fator de carga for maior do que 0.7, será necessário redimensionar a tabela
+  - As tabelas hash são utilizadas como cache de dados (como em um servidor web)
+  - Tabelas hash são ótimas para localizar duplicatas
