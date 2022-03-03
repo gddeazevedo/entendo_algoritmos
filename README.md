@@ -12,6 +12,7 @@ Capítulos
  - [3 - Recursão](#3---recursão)
  - [4 - Quicksort](#4---quicksort)
  - [5 - Tabelas hash](#5---tabelas-hash)
+ - [6 - Pesquisa em largura](#6---pesquisa-em-largura)
 
 </h2>
 
@@ -64,9 +65,9 @@ Capítulos
   - A notação não fornece o tempo em segundos
   - Ela permite que você compare o número de operações
   - Por exemplo, a busca binária precisa de log n operações pra verificar uma lista de tamanho n. Logo, a notação Big O para o binary sort é O(log n)
-  - De maneira geral, a notação big O pode ser escrita como O(f(n)), onde f(n) é uma função que fornece o número de operações que um algoritmo realiza em função do tamanho da entrada
+  - ***De maneira geral, a notação big O pode ser escrita como O(f(n)), onde f(n) é uma função que fornece o número de operações que um algoritmo realiza dado o tamanho da entrada***
   - ***A notação Big O conta o número de operações***
-  - A notação big O nos dá a taxa de crescimento do tempo de execução em função do tamanho da entrada
+  - A notação big O nos dá a taxa de crescimento do tempo de execução (número de operações) em função do tamanho da entrada
   - A notação Big O leva em conta a pior das hipóteses para contar o número de operações
   - Além do tempo de execução para o pior caso, é importante analisar o tempo de execução para o caso médio. Isso é tratado em [4 - Quicksort](#4---quicksort)
   - Alguns exemplos comuns de tempo de execução Big O (ordenado do mais rápido para o mais lento)
@@ -90,7 +91,7 @@ Capítulos
 
 - Arrays e listas encadeadas
   - Arrays armazenam itens contiguamente (um do lado do outro) na memória
-  - Se você quiser adicionar um novo item ao array, você precisa solicitar ao computador uma área de momória que caiba todos os itens contiguamente
+  - Se você quiser adicionar um novo item ao array, você precisa solicitar ao computador uma área de memória que caiba todos os itens contiguamente
   - Adicionar novos itens a um array é lento
   - Um jeito de contornar o problema de adição de itens a um array é 'reservar lugares', mesmo que não utilize todos. Porém, isso traz desvantagens:
     - Você pode não precisar dos espaços extras reservados, então a memória será desperdiçada. Vocẽ nao está utilizando memória, mas ninguém pode usá-la também
@@ -361,7 +362,7 @@ Capítulos
   - Foi dito anteriormente que uma função hash sempre mapeia diferentes chaves para diferentes espaços em um array. Na realidade, é praticamente impossível escrever uma função hash que faça isso
   - *Uma colisão é quando duas chaves são indicadas/mapeadas para o mesmo espaço, e isso é um problema.*
   - Uma forma simples de resolver este problema é: se diversas chaves mapeiam para o mesmo espaço, então inicie uma lista encadeada neste espaço
-  - Se a lista encadeada for pequan não haverá nenhum problema para pesquisar os itens
+  - Se a lista encadeada for pequena não haverá nenhum problema para pesquisar os itens
   - Porém, se ela for grande, a tabela hash se torna ineficiente, pois a lista encadeada aumentará seu tempo de execução
   - Duas lições importantes:
     1. A função hash é muito importante. Ela mapeia (no caso do exemplo do livro) todas as chaves para um único espaço. Idealmente, a função hash mapearia chaves de maneira simétrica por toda a hash
@@ -415,3 +416,51 @@ Capítulos
   - Se o fator de carga for maior do que 0.7, será necessário redimensionar a tabela
   - As tabelas hash são utilizadas como cache de dados (como em um servidor web)
   - Tabelas hash são ótimas para localizar duplicatas
+
+## 6 - Pesquisa em largura
+
+- Pesquisa em largura é conhecida como Breadth-First Search (BFS)
+- A pesquisa em largura utiliza uma estrutura de dados chamada de grafo
+- ***A pesquisa em largura permite encontrar o menor caminho entre dois objetos***
+- O menor caminho pode significar muitas coisas
+- É possível usar a pesquisa em largura para:
+  - Escrever um algoritmo de inteligência artificial que calcula o menor número de movimentos necessários para a vitória em uma partida de damas
+  - Criar um corretor ortográfico
+  - Encontrar o médico conveniado ao seu plano de saúde que está mais próximo de você
+
+- Introdução a grafos
+  - Suponha que você queira ir das Twin Peaks até a ponto Golden Gate
+  - Você pretende chegar lá de ônibus e quer fazer transferência de um ônibus para o outro o menor número de vezes possível
+![twin peaks to goden gate](images/twin_peaks_to_golden_gate.png)
+  - Qual algoritmo você propõe para encontrar o caminho com menor número de etapas?
+  - *Podemos ver se com uma etapa chegamos à ponte, senão, vemos com duas etapas, senão, vemos com três, senão com quatro, e assim por diante até chegarmos à ponte com o menor número de etapas possível*
+  - *No caso do grafo acima, o número mínimo de etapas para chegar à ponte é 3*
+![all steps](images/all_steps.png)
+  - Existem outras rotas que levam até a ponte, mas elas são mais longas
+  - O algoritmo descobriu o caminho mais curto até a ponte demanda três etapas
+  - Esse tipo de problema é chamado de *problema do caminho mínimo*
+  - Neste problema sempre se tenta achar o caminho mínimo para algo, como a rota mais curta entre dois pontos ou número mínimo de movimentos para dar xeque-mate em um jogo de xadrez
+  - ***O algoritmo que resolve problemas de caminho mínimo é a pesquisa em largura***
+  - Para descobrir como ir da Twin Peaks até a Golden Gate existem duas etapas:
+    1. Modelar o problema utilizando grafos
+    2. Resolver o problema utilizando a pesquisa em largura
+
+- O que é um grafo?
+  - Um modelo de grafo é um conjunto de conexões
+  - ***Um grafo é uma estrutura de conjunto de pontos (vértices) e de conjunto de ligações entre os pontos (arestas)***
+  - Por exemplo, se quer descrever quem deve dinheiro a quem num jogo de pôquer
+![poker graph](images/poker_graph.png)
+  - O grafo acima descreve pessoas que devem dinheiro a outras pessoas em uma partida de pôquer
+  - Cada grafo é constituido de vértices e arestas
+![node and edge](images/nodes_and_edges.png)
+  - Grafos são formados por vértices e arestas, e um vértice pode ser diretamente conectado a muitos outros vértices, por isso os chamamos de vizinhos
+  - No grafo da partida de pôquer, Rama é vizinha de Alex. Já Adit não é vizinho de Alex, pois eles não estão diretamente conectados, mas Adit é vizinho de Rama e de Tom
+  - **Vértices vizinhos são vértices que estão diretamente conectados**
+  - Os grafos são uma maneira de modelar como eventos diferentes estão conectados entre si
+
+- Pesquisa em largura
+  - A pesquisa em largura é um tipo diferente de algoritmo, pois utiliza grafo
+  - Este algoritmo ajuda a responder dois tipos de perguntas:
+    1. Existe algum caminho do vértice A até o vértice B?
+    2. Qual o caminho mínimo do vértice A até o vértice B?
+  - 
