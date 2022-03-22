@@ -6,7 +6,7 @@ Person = namedtuple("Person", ["name", "job"])
 graph = {}
 
 graph["you"] = [
-    Person("alice", "programmer"),
+    Person("alice", "seller"),
     Person("bob", "cooker"),
     Person("claire", "car driver")
 ]
