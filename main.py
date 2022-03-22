@@ -1,4 +1,4 @@
-
+from algorithms.bfs import breadth_first_search
 
 if __name__ == '__main__':
-    pass
+    print(breadth_first_search('you'))

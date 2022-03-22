@@ -64,7 +64,7 @@ Capítulos
   - A notação Big O informa quão rápido é um algoritmo, quão rapidamente ele cresce
   - A notação não fornece o tempo em segundos
   - Ela permite que você compare o número de operações
-  - Por exemplo, a busca binária precisa de log n operações pra verificar uma lista de tamanho n. Logo, a notação Big O para o binary sort é O(log n)
+  - Por exemplo, a busca binária precisa de log n operações pra verificar uma lista de tamanho n. Logo, a notação Big O para o binary search é O(log n)
   - ***De maneira geral, a notação big O pode ser escrita como O(f(n)), onde f(n) é uma função que fornece o número de operações que um algoritmo realiza dado o tamanho da entrada***
   - ***A notação Big O conta o número de operações***
   - A notação big O nos dá a taxa de crescimento do tempo de execução (número de operações) em função do tamanho da entrada
@@ -76,7 +76,7 @@ Capítulos
     - O(n * log n). Exemplo: quicksort
     - O(n²). Exemplo: selection sort
     - O(n!). Exemplo: caixeiro-viajante
-  - **Principais pontos**:
+  - ***Principais pontos***:
     - ***A rapidez de um algoritmo não é medida em segundos, mas pelo crescimento do número de operações***
     - Discutimos sobre o quão rapidamente o tempo de execução de um algoritmo aumenta conforme o número de elementos (tamanho do input) aumenta
     - O tempo de execução em algoritmos é expresso na notação Big O
@@ -99,7 +99,7 @@ Capítulos
   - Listas encadeadas resolvem o problema da adição de itens
 
 - Listas encadeadas
-  - Com listas encadeadas, seus itens podem estar em qualquer lugar da memória. Cada item armazena o endereço do próximo item da lista, endereços de aleatórios de memória ficam ligados
+  - Com listas encadeadas, seus itens podem estar em qualquer lugar da memória. Cada item armazena o endereço do próximo item da lista, endereços aleatórios de memória ficam ligados
   - Adicionar um item a uma lista encadeada é fácil: você o coloca em qualquer lugar da memória e armazena o endereço no item anterior
   - Com listas encadeadas, nunca precisamos mover seus itens
   - Listas encadeadas são muito melhores do que arrays para inserções de novos itens
@@ -179,7 +179,7 @@ Capítulos
   - Na lista, os elementos estão espalhados e um elemento armazena o endereço do próximo elemento
   - Arrays permitem leituras rápidas
   - Listas encadeadas permitem rápidas inserções e eliminações
-  - Todos os elementos de um array deve, ser do mesmo tipo
+  - Todos os elementos de um array devem ser do mesmo tipo
   - ***Arrays e listas encadeadas são os blocos fundamentais para estruturas de dados mais complexas***
 
 ## 3 - Recursão
@@ -299,7 +299,7 @@ Capítulos
   - A função hash mapeia consistentemente um nome para o mesmo índice
   - A função hash informará a posição exata no array
   - As tabelas hash são inteligentes, elas usam uma função hash para indicar onde armazenar os elementos
-  - Tabelas hash também são conhecidas como mapas hash, mapas, dicionários e tabelas de dispersão
+  - *Tabelas hash também são conhecidas como mapas hash, mapas, dicionários e tabelas de dispersão*
   - Uma tabela hash contém chaves e valores
   - Uma tabela hash mapeia chaves e valores
 
@@ -463,4 +463,149 @@ Capítulos
   - Este algoritmo ajuda a responder dois tipos de perguntas:
     1. Existe algum caminho do vértice A até o vértice B?
     2. Qual o caminho mínimo do vértice A até o vértice B?
-  - 
+  - Vamos supor que você seja dono de uma fazenda de mangas e está a procura de um vendedor para vender suas mangas
+  - Você conhece algum vendedor de mangas no Facebook?
+  - Existe algum vendedor de mangas na minha rede? (Pergunta 1)
+  - Você pode começar a procurar entre seus amigos
+![friends](images/friends.png)
+  - Primeiro, faça uma lista de amigos para pesquisar
+  - Depois, vá até cada pessoa da lista e verifique se esta pessoa vende mangas
+![friends flowchart](images/friends_flowchart.png)
+  - Imagine que nenhum de seus amigos vende mangas. Então, será necessário pesquisar entre os amigos de seus amigos
+![friends of friends](images/friends_of_friends.png)
+  - Cada vez que você pesquisar uma pessoa da lista, todos os amigos dela serão adicionados à lista
+![friends of friends flowchart](images/friends_of_friends_flowchart.png)
+  - Dessa maneira você não pesquisa apenas entre seus amigos, mas também entre os amigos deles
+  - Então, se Alice não é vendedora de mangas, você adicionará também os amigos dela à lista
+  - Isso significa que, eventualmente, pesquisará entre os amigos dela e entre os amigos dos amigos, e assim por diante
+  - Com esse algoritmo pesquisará toda a sua rede até que encontre um vendedor de mangas
+  - Isto é o algoritmo de pesquisa em largura em ação
+
+- Encontrando o caminho mínimo
+  - Relembrando, existem dois tipos de pergunta que a pesquisa em largura responde:
+    1. Existe um caminho do vértice A ao vértice B? (Existe um vendedor de manga na minha rede?)
+    2. Qual o caminho mínimo do vértice A ao vértice B? (Quem é o vendedor de manga mais próximo?)
+  - A pergunta 1 foi respondida no item anterior
+  - Agora, você consegue encontrar o vendedor de mangas mais próximo? (Pergunta 2)
+  - Seus amigos são conexões de primeiro grau e os amigos deles são conexões de segundo grau
+![friends degrees](images/friends_degrees.png)
+  - Você preferiria uma conexão de primeiro grau em vez de uma de segundo grau, e uma conexão de segundo grau a uma de terceiro grau, e assim por diante
+  - Portano, **não se deve pesquisar nenhuma conexão de segundo grau antes de você ter certeza de que não existe uma conexão de primeiro grau com vendedor de mangas**
+  - A pesquisa em largura já faz isso
+  - *O funcionamento da pesquisa em largura faz com que a pesquisa irradie a partir do ponto inicial*
+  - **Você verificará as conexões de primeiro grau antes das conexões de segundo grau**
+  - ***Conexões de primeiro grau são adicionadas à pesquisa antes de conexões de segundo grau***
+  - Você apenas segue a lista e verifica se a pessoa é uma vendedora de mangas
+  - ***As conexões de primeiro grau serão procuradas antes das de segundo grau, e, dessa forma, você encontrará o vendedor de mangas mais próximo***
+![list degrees](images/list_degrees.png)
+  - **Isso só funciona se você procurar as pessoas na mesma ordem em que elas foram adicionadas**
+  - O que acontece se você pesquisar por Anuj antes de Claire, sendo que ambos são vendedores de mangas?
+  - Anuj é um contato de segundo grau enquanto Claire é um contato de primeiro grau, o que fará com que o vendedor de mangas encontrado não seja o mais próximo
+  - Portanto, é necessário pesquisar as pessoas na ordem em que elas foram adicionadas; para isso existe uma estrutura de dados específica: a fila
+
+- Filas
+  - *Uma fila em estrutura de dados funciona exatamente como uma fila da vida real*
+  - Elas possuem um funcionamento similar ao das pilhas
+  - Não é possível acessar elementos aleatórios numa fila
+  - ***Existem apenas duas operações possíveis em filas***:
+    - ***Enqueue (enfileirar)***
+    - ***Dequeue (desenfileirar)***
+![enqueue and dequeue](images/enqueue_and_dequeue.png)
+  - Se você enfileirar dois itens na fila, o primeiro item adicionado será desenfileirado antes do segundo item
+  - ***A fila é uma estrutura de dados FIFO (First In First Out)***
+  - **Já a pilha é uma estrutura de dados LIFO (Last In First Out)**
+![fifo and lifo](images/fifo_and_lifo.png)
+
+- Implementando o grafo
+  - Um grafo consiste em diversos vértices
+  - Cada vértice está conectado aos vértices vizinhos
+  - Tabela hash é uma estrutura de dados que permite expressar relações
+  - Se deseja mapear um vértice a todos os seus vizinhos
+
+    ```python
+    graph = {}
+    graph["you"] = ["alice", "bob", "claire"]
+    ```
+
+  - Um grafo é apenas um monte de vértices e arestas, portanto o código acima é tudo que você precisa para ter um grafo em Python
+
+![friends of friends](images/friends_of_friends.png)
+
+  - O grafo da imagem, em Python, ficaria assim:
+
+    ```python
+    graph = {}
+    graph["you"] = ["alice", "bob", "claire"]
+    graph["bob"] = ["anuj", "peggy"]
+    graph["alice"] = ["peggy"]
+    graph["claire"] = ["thom", "jonny"]
+    graph["anuj"] = []
+    graph["peggy"] = []
+    graph["thom"] = []
+    graph["jonny"] = []
+    ```
+
+    - Anuj, Peggy, Thom e Jonny não têm vizinhos
+    - Eles têm setas apontadas para eles, mas nenhuma seta partindo deles para outros
+    - Isso se chama dígrafo (ou grafo direcionado), onde a relação acontece apenas em um sentido
+    - Logo, Anuj é visinho de Bob, mas Bob não é vizinho de Anuj
+    - Um grafo não direcionado não contém setas e ambos os vértices são vizinhos um do outro
+
+- Implementando o algoritmo
+  - Este algoritmo utiliza um grafo como estrutura de dados
+  - Então é necessário modelar o problema utilizando grafos
+  - Lógica da pesquisa em largura (para achar um vendedor de mangas mais próximo):
+    1. Crie uma fila contendo todas as pessoas que devem ser verificadas
+    2. Retire uma pessoa da fila
+    3. Confira se esta pessoa é um vendedor de mangas
+    4. Se sim, pronto, você encontrou o vendedor de mangas mais próximo, return True
+    5. Senão, adicione todos vizinhos dela na fila
+    6. Repita
+    7. Caso a fila esteja vazia, não existe vendedores de manga em sua rede, return False
+  - Ao verificar uma pessoa, deve-se marcá-la como verificada para que ela não seja pesquisada novamente
+  - [Algoritmo da pesquisa em largura](algorithms/bfs/breadth_first_search.py)
+
+    ```python
+    def breadth_first_search(name):
+        '''Search for a mango seller in a graph'''
+        queue = deque()
+        queue.extend(graph["you"])
+        verified_names = []
+
+        while queue:
+            name = queue.popleft() # gets the first person in the queue
+
+            if name not in verified_names:
+                if is_person_seller(name): # check if the person is a seller
+                    print(f"{name} is a mango seller!")
+                    return True # yes, they're a seller
+
+                # no, they ain't a seller, add all their friends to the queue
+                queue.extend(graph[name])
+                verified_names.append(name)
+
+    return False
+    ```
+
+- Tempo de execução
+  - Se você procurar um vendedor de mangas em toda a sua rede, cada aresta será analisada
+  - Portanto o tempo de execução é, no mínimo, O(número de arestas)
+  - Além disso, será mantida uma lista com pessoas já verificadas
+  - Adicionar pessoas à lista leva um tempo constante O(1)
+  - Fazer isso para cada pessoa terá tempo de execução O(número de pessoas) no total
+  - Assim, a pesquisa em largura tem tempo de execução O(número de pessoas + número de arestas)
+  - A = número de arestas
+  - V = número de vértices
+  - ***A pesquisa em largura tem tempo de execução O(A + V)***
+
+- ***Principais pontos***
+  - **A pesquisa em largura serve para achar o camiho mínimo do ponto A até o ponto B em um grafo direcionado (dígrafo)**
+  - A pesquisa em largura lhe diz se há um caminho de A para B
+  - Se esse caminho existe, a pesquis em largura lhe dará o caminho mínimo
+  - Se você tem um problema do tipo "encontre o menor X", tente modelar o seu problema utilizando grafos e use a pesquisa em largura para resolvê-lo
+  - Um dígrafo contém setas e as relações seguem a direção das setas
+  - Grafos não direcionados não contém setas, e as relações acontecem nos dois sentidos
+  - Filas são FIFO (First In First Out)
+  - Pilhas são LIFO (Last In First Out)
+  - Você precisa verificar os itens na ordem em que foram adicionados à fila de pesquisa. Portanto, a lista de pesquisa deve ser uma fila; caso contrário, você não obterá o caminho mínimo
+  - Cada vez que você precisar verificar alguém, procure não verificá-lo novamente. Caso contrário, poderá acabar em um loop infinito
