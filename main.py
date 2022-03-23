@@ -1,4 +1,4 @@
-from algorithms.bfs import breadth_first_search
+from algorithms import dijkstras_algorithm
 
 if __name__ == '__main__':
-    print(breadth_first_search('you'))
+    dijkstras_algorithm()

@@ -7,6 +7,6 @@ def quick_sort(array: list[Any]) -> list[Any]:
 
     pivot = array[0] # Caso recursivo
     smallers = [i for i in array[1:] if i <= pivot] # Subarray de elementos menores que o pivot
-    biggers = [i for i in array[1:] if i > pivot] # Subarray de elementos maiores que o pivot
+    largers = [i for i in array[1:] if i > pivot] # Subarray de elementos maiores que o pivot
 
-    return quick_sort(smallers) + [pivot] + quick_sort(biggers)
+    return quick_sort(smallers) + [pivot] + quick_sort(largers)

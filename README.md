@@ -13,6 +13,7 @@ Capítulos
  - [4 - Quicksort](#4---quicksort)
  - [5 - Tabelas hash](#5---tabelas-hash)
  - [6 - Pesquisa em largura](#6---pesquisa-em-largura)
+ - [7 - Algoritmo de Dijkstra](#7---algoritmo-de-dijkstra)
 
 </h2>
 
@@ -563,7 +564,7 @@ Capítulos
     6. Repita
     7. Caso a fila esteja vazia, não existe vendedores de manga em sua rede, return False
   - Ao verificar uma pessoa, deve-se marcá-la como verificada para que ela não seja pesquisada novamente
-  - [Algoritmo da pesquisa em largura](algorithms/bfs/breadth_first_search.py)
+  - [Algoritmo da pesquisa em largura](algorithms/breadth_first_search.py)
 
     ```python
     def breadth_first_search(name):
@@ -609,3 +610,76 @@ Capítulos
   - Pilhas são LIFO (Last In First Out)
   - Você precisa verificar os itens na ordem em que foram adicionados à fila de pesquisa. Portanto, a lista de pesquisa deve ser uma fila; caso contrário, você não obterá o caminho mínimo
   - Cada vez que você precisar verificar alguém, procure não verificá-lo novamente. Caso contrário, poderá acabar em um loop infinito
+
+## 7 - Algoritmo de Dijkstra
+
+- Este algoritmo serve para achar o caminho mais rápido
+- O algoritmo de Dijkstra determina o caminho mínimo até X para grafos ponderados
+
+- Trabalhando com o algoritmo de Dijkstra
+  - O algoritmo de Dijkstra tem quatro etapas (VER NO LIVRO O EXEMPLO PARA ENTENDER MELHOR):
+    1. Encontre o vértice mais barato. Este é o vértice em que você consegue chegar no menor tempo possível
+    2. Verifique se á um caminho mais barato para os vizinhos desse vértice. Caso exista, atualize seus custos
+    3. Repita até que você tenha feito isso para cada vértice do grafo
+    4. Calcule o caminho final (seguindo os pais, do final para o início, você terá o caminho completo)
+  - Na pesquisa em largura, o caminho mínimo significa o caminho com menor número de segmentos
+  - No algoritmo de Dijkstra você atribui um peso para cada segmento. Logo, o algoritmo encontra o caminho com menor peso total
+  - ***Grafos ponderados: usar algoritmo de Dijkstra***
+  - *Grafos não ponderados: usar busca em largura*
+
+- Terminologia
+  - Quando você trabalha com o algoritmo de Dijkstra, cada aresta do grafo tem um número associado a ela. Eles são chamados de pesos
+  - Um grafo com pesos é chamado grafo ponderado
+  - O algoritmo de Dijkstra só funciona em grafos sem ciclos ou em grafos com um ciclo de peso positivo
+  - Você não pode usar o algoritmo de Dijkstra se o grafo tiver arestas com pesos negativos
+
+- Implementação
+  - O grafo usado para exemplo será este:
+![Grafo de exemplo](images/graph.png)
+  - Para programar esse exemplo, será necessário três tabelas hash:
+![All hash tables](images/all_hash_tables.png)
+  - As tabelas hash relativas ao custo e aos pais serão atualizadas conforme o algoritmo for executado
+  - Para implementar o grafo, é necessário armazenar os vizinhos e o custo para chegar até aquele vizinho. Para isso será necessário usar uma tabela hash dentro de uma tabela hash. Exemplo, grafo abaixo é modelado da seguinte forma:
+![Grafo a ser modelado](images/start_edges.png)
+
+    ```python
+    graph = {}
+    graph["start"] = {}
+    graph["start"]["a"] = 6
+    graph["start"]["b"] = 2
+    ```
+  
+  - Além das tabelas hash, será necessário um array para manter o registro de todos os vértices processados
+  - Lógica do algoritmo de Dijkstra:
+    1. Enquanto houver vértices a serem processados
+    2. Pegue o vértice que está mais próximo do início
+    3. Atualize os custos para os seus vizinhos
+    4. Se qualquer um dos custos vizinhos for atualizado, atualize também o pai
+    5. Marque o vértice como processado e volte a etapa 1;
+
+  - [Algoritmo de Dijkstra](algorithms/dijkstras_algorithm.py)
+
+    ```python
+    def dijkstras_algorithm():
+        node = find_lowest_cost_node(costs)
+
+        while node is not None:
+            cost = costs[node]
+            neighbours = graph[node]
+
+            for neighbour_node, neighbour_cost in neighbours.items():
+                new_cost = cost + neighbour_cost
+
+                if new_cost < costs[neighbour_node]:
+                    costs[neighbour_node] = new_cost
+                    parents[neighbour_node] = node
+
+            processed.append(node)
+            node = find_lowest_cost_node(costs)
+    ```
+
+- ***Principais pontos***
+  - A pesquisa em largura é usada para calcular o caminho mínimo em um grafo não ponderado
+  - O algoritmo de Dijkstra é usado para calcular o caminho mínimo em um grafo ponderado
+  - O algoritmo de Dijkstra funciona quando todos os pesos são positivos
+  - Se o seu grafo tiver pesos negativos, use o algoritmo de Bellman-Ford

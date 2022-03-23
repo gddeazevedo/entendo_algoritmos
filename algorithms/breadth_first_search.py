@@ -1,10 +1,9 @@
 from collections import deque, namedtuple
 
+
 Person = namedtuple("Person", ["name", "job"])
 
-
 graph = {}
-
 graph["you"] = [
     Person("alice", "seller"),
     Person("bob", "cooker"),
