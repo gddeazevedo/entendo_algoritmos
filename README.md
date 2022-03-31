@@ -1,4 +1,4 @@
-<h1>Anotações sobre o livro <strong>"Entendo Algoritmos"</strong> de Aditya Y. Bhargava</h1>
+# Anotações sobre o livro <strong>"Entendo Algoritmos"</strong> de Aditya Y. Bhargava
 
 <https://github.com/egonSchiele/grokking_algorithms>
 
@@ -7,13 +7,15 @@
 
 Capítulos
 
- - [1 - Introdução a algoritmos](#1---introdução-a-algoritmos)
- - [2 - Ordenação por seleção](#2---ordenação-por-seleção)
- - [3 - Recursão](#3---recursão)
- - [4 - Quicksort](#4---quicksort)
- - [5 - Tabelas hash](#5---tabelas-hash)
- - [6 - Pesquisa em largura](#6---pesquisa-em-largura)
- - [7 - Algoritmo de Dijkstra](#7---algoritmo-de-dijkstra)
+- [Anotações sobre o livro <strong>"Entendo Algoritmos"</strong> de Aditya Y. Bhargava](#anotações-sobre-o-livro-entendo-algoritmos-de-aditya-y-bhargava)
+  - [1 - Introdução a algoritmos](#1---introdução-a-algoritmos)
+  - [2 - Ordenação por seleção](#2---ordenação-por-seleção)
+  - [3 - Recursão](#3---recursão)
+  - [4 - Quicksort](#4---quicksort)
+  - [5 - Tabelas hash](#5---tabelas-hash)
+  - [6 - Pesquisa em largura](#6---pesquisa-em-largura)
+  - [7 - Algoritmo de Dijkstra](#7---algoritmo-de-dijkstra)
+  - [8 - Algoritmos gulosos](#8---algoritmos-gulosos)
 
 </h2>
 
@@ -585,7 +587,7 @@ Capítulos
                 queue.extend(graph[name])
                 verified_names.append(name)
 
-    return False
+        return False
     ```
 
 - Tempo de execução
@@ -683,3 +685,36 @@ Capítulos
   - O algoritmo de Dijkstra é usado para calcular o caminho mínimo em um grafo ponderado
   - O algoritmo de Dijkstra funciona quando todos os pesos são positivos
   - Se o seu grafo tiver pesos negativos, use o algoritmo de Bellman-Ford
+
+## 8 - Algoritmos gulosos
+
+- Um algoritmo guloso (ou ganancioso) é simples: a cada etapa, deve-se escolher o movimento ideal
+- Em termos técnicos: a cada etapa, escolhe-se a solução ideal, e no fim tem uma solução global ideal
+- Os algoritmos gulosos nem sempre funcionam
+- Algoritmos gulosos são algoritmos de aproximação
+- Algoritmos gulosos servem para tentar achar uma solução aproximada de problemas NP-completos
+- Problemas NP-completos são problemas que não têm algoritmo de solução rápida. Ex.: Problema do caixeiro viajante
+
+- O problema da cobertura de conjuntos
+  - Suponha que você esteja começando um programa de rádio e queira atingir ouvintes em todos os estados dos EUA
+  - É necessário decidir em quais estações transmitir para atingir todos os ouvintes
+  - Você está tentando minimizar o número de estações nas quais você transmite para minimizar os custos
+  - Cada estação de rádio abrange uma região e existe sobreposição
+  - Como descobrir o menor conjunto de estações nas quais você pode transmitir a abranger os ciquenta estados?
+  - Uma solução:
+    1. De um conjunto de estações, liste cada subconjunto possível de estações. Existem 2^n possíveis subconjuntos
+    2. Entre os subconjuntos, escolha o conjunto com o menor número de estações que abranja todos os cinquenta estados
+  - O tempo de execução dessa solução é O(2^n), pois há 2^n conjuntos para serem analisados
+  - O tempo de execução é extremamente longo!
+  - *Não existe um algoritmo que resolva isso rápido o suficiente!*
+
+- Algoritmos de aproximação
+  - Exemplo de algoritmo guloso para resolver o problema da cobertura de conjuntos:
+    1. Pegue a estação que abranja o maior número de estados que ainda não foram cobertos. Tudo bem se a estação abranger alguns estados que já foram cobertos
+    2. Repita isso até que todos os estados tenham sido cobertos
+  - O exemplo acima é um algoritmo de aproximação
+  - Quando é necessário muito tempo para calcular a solução exata, um algoritmo de aproximação é uma boa ideia e funciona
+  - Algoritmos de aproximação são avaliados:
+    - por sua rapidez
+    - pela capacidade de chegar à solução ideal
+  - No caso da solução acima, o algoritmo guloso tem tempo de execução O(n²), em que n é o número de estações de rádio
