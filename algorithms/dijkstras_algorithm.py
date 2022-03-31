@@ -26,6 +26,8 @@ processed = []
 
 
 def find_lowest_cost_node(costs: dict[str, int | float]):
+    global processed
+
     lowest_cost = math.inf
     lowest_cost_node = None
 
@@ -38,6 +40,11 @@ def find_lowest_cost_node(costs: dict[str, int | float]):
 
 
 def dijkstras_algorithm():
+    global costs
+    global graph
+    global parents
+    global processed
+
     node = find_lowest_cost_node(costs)
 
     while node is not None:
