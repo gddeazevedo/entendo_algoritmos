@@ -718,3 +718,23 @@ Capítulos
     - por sua rapidez
     - pela capacidade de chegar à solução ideal
   - No caso da solução acima, o algoritmo guloso tem tempo de execução O(n²), em que n é o número de estações de rádio
+
+- Problemas NP-completos
+  - Exemplos de problemas NP-completos: o problema do caixeiro viajante; o problema da cobertura de conjuntos
+  - Problemas NP-completos são problemas que são notoriamente difíceis de resolver e que possuem uma taxa de crescimento muito grande
+  - O tempo de execução do caixeiro viajante é O(n!)
+  - O tempo de execução da cobertura de conjuntos é O(2^n)
+  - Não há uma maneira fácil de dizer se o problema em que você está trabalhando é NP-completo
+  - Alguns indicativos:
+    1. Seu algoritmo roda rápido para alguns itens, mas fica muito lento com o aumento de itens
+    2. "Todas as combinações de X" geralmente significam um problema NP-completo
+    3. Você tem que calcular "cada possível versão" de X porque não pode dividir em subproblemas menores? Talvez seja um problema NP-completo
+    4. Se o seu problema envolve uma sequência e é difícil de resolver, pode ser um problema NP-completo
+    5. Se o seu problema envolve um conjunto e é difícil resolver, ele pode ser um problema NP-completo
+    6. Você pode reescrever o seu problema como o problema de cobertura mínima de conjuntos ou o problema do caixeiro viajante? Então seu problema é definitivamente NP-completo
+
+- ***Principais pontos***
+  - Algoritmos gulosos otimizam localmente na esperança de acabar em uma otimização global
+  - Problemas NP-completos não têm uma solução rápida
+  - Se você estiver tentando resolver um problema NP-completo, o melhor a fazer é usar um algoritmo de aproximação
+  - Algoritmos gulosos são fáceis de escrever e têm o tempo de execução baixo, portanto eles são bons algoritmos de aproximação
