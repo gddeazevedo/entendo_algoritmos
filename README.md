@@ -16,6 +16,7 @@ Capítulos
   - [6 - Pesquisa em largura](#6---pesquisa-em-largura)
   - [7 - Algoritmo de Dijkstra](#7---algoritmo-de-dijkstra)
   - [8 - Algoritmos gulosos](#8---algoritmos-gulosos)
+  - [9 - Programação dinâmica](#9---programação-dinâmica)
 
 </h2>
 
@@ -738,3 +739,37 @@ Capítulos
   - Problemas NP-completos não têm uma solução rápida
   - Se você estiver tentando resolver um problema NP-completo, o melhor a fazer é usar um algoritmo de aproximação
   - Algoritmos gulosos são fáceis de escrever e têm o tempo de execução baixo, portanto eles são bons algoritmos de aproximação
+
+
+## 9 - Programação dinâmica
+
+- É uma técnica para resolução de problemas complexos que se baseia an divisão de um problema em subproblemas, os quais são resolvidos separadamente
+- O algoritmo da programação dinâmica começa com a resolução de subproblemas e vai escalando-os até resolver o problema geral
+- Cada algoritmo de programação dinâmica comeã com uma tabela
+- Quando a tabela for preenchida, a resposta do problema terá sido encontrada
+- A ordem das linhas na tabela não importa
+- A programação dinâmica só funciona quando os seus subproblemas são discretos, ou seja, eles não são dependentes entre si
+
+- Maior substring comum
+  - A programação dinâmica é útil quando se está tentando otmizar em relação a um limite
+  - Você pode usar a programação dinâmica quando o problema puder ser separado em subproblemas discretos que não dependam um do outro
+  - *Toda solução de programação dinâmica envolve uma tabela*
+  - Os valores das célular são, geralmente, o que você está tentando otimizar
+  - Cada célula é um subproblema
+  - Neste exemplo, estamos tentando encontrar a maior substring comum entre duas palavras
+  - As palavras de exemplo são fish, hish e vista
+  - Neste caso, os valores das células serão números relativos ao comprimeito da maior substring que duas strings tem em comum
+  - Como dividimos este problema em subproblemas? Comparando substrings
+  - Os eixos das tabelas serão as palavras
+  - ***Ver no livro o resto**
+
+- Maior subsequência em comum
+  - ***Ver no livro***
+
+- ***Principais pontos***
+  - Programação dinâmica é útil quando você está tentando otimizar algo em relação a um limite
+  - Você pode utilizar programação dinâmica quando o problema puder ser dividido em subproblemas discretos
+  - Todas as soluções em programação dinâmica envolvem uma tabela
+  - Os valores nas células são, geralmente, o que você está tentando otimizar
+  - Cada célula é um subproblema
+  - Não existe uma fórmula única para calcular uma solução em programação dinâmica
